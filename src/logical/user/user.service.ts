@@ -21,18 +21,35 @@ export class UserService {
         account_name = '${username}'
     `; // 一段平淡无奇的 SQL 查询语句
     try {
-      const user = (
+      const res = (
         await sequelize.query(sql, {
           type: Sequelize.QueryTypes.SELECT, // 查询方式
           raw: true, // 是否使用数组组装的方式展示结果
           logging: false, // 是否将 SQL 语句打印到控制台
         })
-      )[0];
+      );
+      const user = res[0]
+      if (user) {
+        return {
+          code: 200, // 返回状态码，可自定义
+          data: {
+            user,
+          },
+          msg: 'Success',
+        };
+      } else {
+        return {
+          code: 600,
+          msg: '查无此人',
+        };
+      }
       // 若查不到用户，则 user === undefined
-      return user;
-    } catch (error) {
-      console.error(error);
-      return void 0;
+        // return user;
+      } catch (error) {
+        return {
+          code: 503,
+          msg: `Service error: ${error}`,
+        };
     }
   }
 

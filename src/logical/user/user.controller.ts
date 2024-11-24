@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { ValidationPipe } from '../../pipe/validation.pipe';
 import { LoginDTO, RegisterInfoDTO } from './user.dto';
 import { ApiTags, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
+import { log } from 'console';
 @ApiBearerAuth()
 @ApiTags('user')
 @Controller('user')
@@ -42,4 +43,13 @@ export class UserController {
   async register(@Body() body: RegisterInfoDTO) {
     return await this.usersService.register(body);
   }
+  @Post('find-one')
+  async findOne(@Body() body) {
+    const {username} = body
+    console.log('username: ', username);
+    const findRes = await this.usersService.findOne(username)
+    log('find res: ', findRes)
+    return findRes
+  }
+
 }
