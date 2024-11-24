@@ -1,7 +1,7 @@
 // config/db.ts
 const productConfig = {
   mysql: {
-    port: '数据库端口',
+    port: 3306,
     host: '数据库地址',
     user: '用户名',
     password: '密码',
@@ -12,7 +12,7 @@ const productConfig = {
 
 const localConfig = {
   mysql: {
-    port: '3306',
+    port: 3306,
     host: '127.0.0.1',
     user: 'root',
     password: '123',
