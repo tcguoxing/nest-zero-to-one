@@ -7,6 +7,8 @@ import { LoginDTO, RegisterInfoDTO } from './user.dto';
 import { ApiTags, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 import { log } from 'console';
 @ApiBearerAuth()
+// 可以在最外层添加一个全局的jwt验证；
+// @UseGuards(AuthGuard('jwt'))
 @ApiTags('user')
 @Controller('user')
 export class UserController {
@@ -19,7 +21,7 @@ export class UserController {
     type: LoginDTO,
   })
   async login(@Body() loginParmas: LoginDTO) {
-    // console.log('JWT验证 - Step 1: 用户请求登录');
+    console.log('JWT验证 - Step 1: 用户请求登录');
     const authResult = await this.authService.validateUser(loginParmas.username, loginParmas.password);
     switch (authResult.code) {
       case 1:
@@ -37,12 +39,15 @@ export class UserController {
     }
   }
 
+  // JWT守卫
   @UseGuards(AuthGuard('jwt'))
   @UsePipes(new ValidationPipe())
   @Post('register')
-  async register(@Body() body: RegisterInfoDTO) {
+  async register(@Body() body: any) {
     return await this.usersService.register(body);
   }
+
+  @UseGuards(AuthGuard('jwt'))
   @Post('find-one')
   async findOne(@Body() body) {
     const {username} = body
