@@ -10,6 +10,7 @@ import * as crypto from 'crypto';
 
 /**
  * Make salt
+ * 盐，其实就是盐加密；
  */
 export function makeSalt(): string {
   return crypto.randomBytes(3).toString('base64');
