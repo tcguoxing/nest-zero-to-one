@@ -8,9 +8,10 @@ import { UserModule } from './logical/user/user.module';
 import { AuthModule } from './logical/auth/auth.module';
 import { CommodityService } from './logical/commodity/commodity.service';
 import { CommodityController } from './logical/commodity/commodity.controller';
+import { ImgModule } from './logical/img/img.module';
 
 @Module({
-  imports: [UserModule, AuthModule],
+  imports: [UserModule, AuthModule, ImgModule],
   controllers: [AppController, UserController, CommodityController],
   providers: [AppService, CommodityService],
 })
