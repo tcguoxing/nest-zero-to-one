@@ -15,7 +15,7 @@ const localConfig = {
     port: 3306,
     host: '127.0.0.1',
     user: 'root',
-    password: '',
+    password: '123',
     database: 'nest_zero_to_one', // 库名
     connectionLimit: 10, // 连接限制
   },

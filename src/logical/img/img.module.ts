@@ -3,6 +3,7 @@ import { ImgController } from './img.controller';
 import { ImgService } from './img.service';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { extname, join } from 'path';
 
 // 创建有关图像上传下载的功能；
 @Module({
@@ -20,7 +21,7 @@ import { diskStorage } from 'multer';
         //path模块的join()函数，用来合并两个目录。
         //拿上面的例子距离，合并后的路径为：/home/images
         //因为../images表示上一级目录的images文件夹
-        destination: join(__dirname, "../images"),
+        destination: join(__dirname, "../../images"),
         //定义文件名，这里通过函数来决定文件的名字
         //这个函数传入三个参数：request、file对象和callback函数
         //callback函数接收两个参数：错误对象和文件名。如果没有错误通常传入null
@@ -28,6 +29,7 @@ import { diskStorage } from 'multer';
         filename: (_, file, callback) => {
           //这里的文件名为字符串，具体是：当前时间的时间戳 + 文件扩展名
           const fileName = `${new Date().getTime() + extname(file.originalname)}`
+          console.log('fileName: ', fileName)
           return callback(null, fileName)
         }
       })
