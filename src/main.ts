@@ -29,6 +29,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-doc', app, document);
 
+  app.use('/img/upload', express.static(`${__dirname}/img/upload`));
+
   await app.listen(3000);
 }
 bootstrap();
