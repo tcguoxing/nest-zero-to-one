@@ -5,7 +5,7 @@ import { Express } from 'express';
 
 @Injectable()
 export class ImgService {
-  uploadImag(@UploadedFile() file) {
+  async uploadFile(file): Promise<string> {
     // try {
     //   const record = await sequelize.create({
     //     id: uuid(), // 使用 UUID 或其他唯一标识符生成器
@@ -24,6 +24,7 @@ export class ImgService {
     //   throw new HttpException('上传失败', HttpStatus.INTERNAL_SERVER_ERROR);
     // }
     console.log('upload img: ', file)
+    return `http://localhost/img/upload/${file.originalname}`;
     // throw new Error('Method not implemented.');
   }
 }
