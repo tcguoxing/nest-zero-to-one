@@ -27,8 +27,10 @@ import { extname, join } from 'path';
         //callback函数接收两个参数：错误对象和文件名。如果没有错误通常传入null
         //callback函数用来通知multer，文件命名已经完成了，如果没有错误的话可以进行下一步操作了
         filename: (_, file, callback) => {
-          const fileName = `${new Date().getTime() + extname(file.originalname)}`;
-          return callback(null, fileName);
+          let ext = file.originalname.split('.').at(-1)
+          // 在此处自定义保存后的文件名称，仍然使用原后缀名，没有就不用
+          let filename = `${new Date().getTime()}.${ext ? ext : ''}`
+          return callback(null, filename);
         },
       }),
     }),
