@@ -10,10 +10,11 @@ import { CommodityService } from './logical/commodity/commodity.service';
 import { CommodityController } from './logical/commodity/commodity.controller';
 import { ImgModule } from './logical/img/img.module';
 import { ImgController } from './logical/img/img.controller';
+import { ImgService } from './logical/img/img.service';
 
 @Module({
   imports: [UserModule, AuthModule, ImgModule],
   controllers: [AppController, UserController, CommodityController, ImgController],
-  providers: [AppService, CommodityService],
-})
+  providers: [AppService, CommodityService, ImgService],
+})    
 export class AppModule {}

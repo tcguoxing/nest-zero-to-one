@@ -1,5 +1,5 @@
 import { Injectable, UploadedFile } from '@nestjs/common';
-import { MulterDiskUploadedFiles } from '@nestjs/platform-express';
+// import { MulterDiskUploadedFiles } from '@nestjs/platform-express';
 // import uuid from 'uuid'
 // import sequelize from '../../database/sequelize'; // 引入 Sequelize 实例
 
