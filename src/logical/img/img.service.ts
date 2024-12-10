@@ -1,11 +1,11 @@
 import { Injectable, UploadedFile } from '@nestjs/common';
-import { Express } from 'express';
+// import { Express } from '@types/multer';
 // import uuid from 'uuid'
 // import sequelize from '../../database/sequelize'; // 引入 Sequelize 实例
 
 @Injectable()
 export class ImgService {
-  async uploadFile(file): Promise<string> {
+  async uploadFile(file: Express.Multer.File): Promise<string> {
     // try {
     //   const record = await sequelize.create({
     //     id: uuid(), // 使用 UUID 或其他唯一标识符生成器

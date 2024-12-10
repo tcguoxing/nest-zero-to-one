@@ -21,7 +21,8 @@ import { extname, join } from 'path';
         //path模块的join()函数，用来合并两个目录。
         //拿上面的例子距离，合并后的路径为：/home/images
         //因为../images表示上一级目录的images文件夹
-        destination: join(__dirname, 'img/upload'),
+        // destination: join(__dirname, './uploads'),
+        destination: './uploads',
         //定义文件名，这里通过函数来决定文件的名字
         //这个函数传入三个参数：request、file对象和callback函数
         //callback函数接收两个参数：错误对象和文件名。如果没有错误通常传入null
