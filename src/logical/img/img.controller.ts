@@ -9,7 +9,8 @@ export class ImgController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
-  async uploadFile(@UploadedFile() file): Promise<{ url: string }> {
+  async uploadFile(@UploadedFile() file: Express.Multer.File): Promise<{ url: string }> {
+    console.log('dirname: ', __dirname)
     const fileUrl = await this.imgService.uploadFile(file);
     return { url: fileUrl };
   }

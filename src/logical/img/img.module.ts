@@ -12,7 +12,7 @@ import { extname, join } from 'path';
   // service 业务模块
   imports: [
     MulterModule.register({
-      limits: { fileSize: 51200 * 1024 }, // 限制文件大小为10MB
+      // limits: { fileSize: 51200 * 1024 }, // 限制文件大小为50MB
       // 最后，从性能角度考虑，使用服务器（本地）存储图片的方式；
       storage: diskStorage({
         //destination配置文件上传后的路径
@@ -21,17 +21,23 @@ import { extname, join } from 'path';
         //path模块的join()函数，用来合并两个目录。
         //拿上面的例子距离，合并后的路径为：/home/images
         //因为../images表示上一级目录的images文件夹
-        // destination: join(__dirname, './uploads'),
-        destination: './uploads',
+        // destination: (req, file, cb) => {
+        //   cb(null, join(__dirname, './ceshitupian3'));
+        // },
+        destination: join(__dirname, '../ceshitupian3'),
         //定义文件名，这里通过函数来决定文件的名字
         //这个函数传入三个参数：request、file对象和callback函数
         //callback函数接收两个参数：错误对象和文件名。如果没有错误通常传入null
         //callback函数用来通知multer，文件命名已经完成了，如果没有错误的话可以进行下一步操作了
-        filename: (_, file, callback) => {
-          let ext = file.originalname.split('.').at(-1)
-          // 在此处自定义保存后的文件名称，仍然使用原后缀名，没有就不用
-          let filename = `${new Date().getTime()}.${ext ? ext : ''}`
-          return callback(null, filename);
+        filename: (req, file, callback) => {
+          // let ext = file.originalname.split('.')[0]
+          console.log('lallalala: ');
+          
+          // // 在此处自定义保存后的文件名称，仍然使用原后缀名，没有就不用
+          // let filename = `${new Date().getTime()}.${ext ? ext : ''}`
+          // // return callback(null, filename);
+          // callback(null, filename);
+          return callback(null, Date.now() + '-' + file.originalname);
         },
       }),
     }),
